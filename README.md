@@ -97,10 +97,8 @@ For a seller protecting $50K/mo revenue from review-driven ranking drops, this i
 ### Talk to me
 
 I do custom AI automation builds for cross-border e-commerce teams. Reach out:
-- 📧 [your email]
-- 💬 WeChat: [your handle]
-- 🐦 Twitter: [@your_handle]
-- 💼 [LinkedIn](#)
+- 💬 Open a GitHub issue: https://github.com/lhrdsg6-debug/amazon-review-ai-monitor/issues
+- 🧑‍💻 GitHub: https://github.com/lhrdsg6-debug
 
 Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Claude API actual cost (~¥30-100), I keep rights to anonymized case study.
 
@@ -183,7 +181,7 @@ Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Cl
 
 ### Quick start
 ```bash
-git clone https://github.com/[your-handle]/amazon-review-ai-monitor
+git clone https://github.com/lhrdsg6-debug/amazon-review-ai-monitor
 cd amazon-review-ai-monitor
 cp .env.example .env  # fill in API keys
 pip install -r requirements.txt
