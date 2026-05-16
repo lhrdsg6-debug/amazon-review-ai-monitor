@@ -1,0 +1,145 @@
+{
+  "total_reviews": 90,
+  "themes_ranked": [
+    {
+      "rank": 1,
+      "theme": "4. 设计缺陷:使用体验反人类",
+      "count": 25,
+      "percentage": 27.8,
+      "by_asin": {
+        "B09176JCKZ": 6,
+        "B0C6KPRV8S": 16,
+        "B081JSFHZK": 3
+      },
+      "examples": [
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Falls Short Of Previous Chargers"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Cuts out after a few minutes"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 2,
+          "title": "Caution: Will NOT charge light loads!"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "theme": "1. 虚假宣传:实物与 listing 不符",
+      "count": 24,
+      "percentage": 26.7,
+      "by_asin": {
+        "B09176JCKZ": 8,
+        "B0C6KPRV8S": 5,
+        "B081JSFHZK": 11
+      },
+      "examples": [
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Not a fast charging powerbank with its own data cable"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Misleading battery capacity"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Not the smallest power bank with misleading labeling and deceptive picture"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "theme": "3. 制造质量差:拉链/卡扣/接缝失效",
+      "count": 20,
+      "percentage": 22.2,
+      "by_asin": {
+        "B09176JCKZ": 4,
+        "B0C6KPRV8S": 3,
+        "B081JSFHZK": 13
+      },
+      "examples": [
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "It's compact"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 2,
+          "title": "Junk"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 2,
+          "title": "Wire doesn't sit securely causing it to disconnect"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "theme": "2. 产品寿命短:几周-几个月就坏",
+      "count": 11,
+      "percentage": 12.2,
+      "by_asin": {
+        "B09176JCKZ": 10,
+        "B0C6KPRV8S": 1,
+        "B081JSFHZK": 0
+      },
+      "examples": [
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Battery cycle quantity is weak"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "Doesn't hold a charge"
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 2,
+          "title": "Was nice while it lasted"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "theme": "5. 安全风险:可能导致财产/人身损失",
+      "count": 7,
+      "percentage": 7.8,
+      "by_asin": {
+        "B09176JCKZ": 2,
+        "B0C6KPRV8S": 4,
+        "B081JSFHZK": 1
+      },
+      "examples": [
+        {
+          "asin": "B09176JCKZ",
+          "rating": 3,
+          "title": "It will do."
+        },
+        {
+          "asin": "B09176JCKZ",
+          "rating": 1,
+          "title": "PSA - will make your 17 Pros HOT!"
+        },
+        {
+          "asin": "B0C6KPRV8S",
+          "rating": 1,
+          "title": "So Many Issues...Where Do I Begin?"
+        }
+      ]
+    }
+  ]
+}
