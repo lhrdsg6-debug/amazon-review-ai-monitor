@@ -97,7 +97,8 @@ For a seller protecting $50K/mo revenue from review-driven ranking drops, this i
 ### Talk to me
 
 I do custom AI automation builds for cross-border e-commerce teams. Reach out:
-- 💬 Open a GitHub issue: https://github.com/lhrdsg6-debug/amazon-review-ai-monitor/issues
+- 💬 WeChat: `LHr20010725g` (add as friend with note "Amazon Seller + your store category"; requests without notes will be declined)
+- 🐛 Open a GitHub issue: https://github.com/lhrdsg6-debug/amazon-review-ai-monitor/issues
 - 🧑‍💻 GitHub: https://github.com/lhrdsg6-debug
 
 Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Claude API actual cost (~¥30-100), I keep rights to anonymized case study.
@@ -165,7 +166,9 @@ Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Cl
 - 销售数据 + 库存联动预警
 - 红人/影响者外联自动化
 
-联系方式见上方 English 部分。
+联系方式:
+- 💬 微信:`LHr20010725g`(加好友请备注 "Amazon卖家+店铺品类",无备注不通过)
+- 🐛 GitHub Issue:https://github.com/lhrdsg6-debug/amazon-review-ai-monitor/issues
 
 **当前免费 PoC 名额:5 位卖家**,只收取 Apify + Claude API 的实际成本(¥30-100),交换条件是允许我把脱敏后的成果写进案例。
 
