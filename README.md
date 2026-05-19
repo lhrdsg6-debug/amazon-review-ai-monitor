@@ -5,7 +5,7 @@
 
 [![Cost](https://img.shields.io/badge/Cost-%240.001%2Freview-green)]() [![Speed](https://img.shields.io/badge/Speed-38s%2F90_reviews-blue)]() [![Coverage](https://img.shields.io/badge/Amazon_Regions-20%2B-orange)]()
 
-![Top 5 Negative Themes](./output/top5-negative-themes.png)
+![Top 5 Negative Themes](./top5-negative-themes.png)
 
 ---
 
@@ -35,26 +35,25 @@ We ran this on **3 typical Chinese-seller ASINs** on Amazon UK on **May 14, 2026
 - Total runtime: **38 seconds**
 - Total cost: **$0.09** (~¥0.65)
 - Reviews actually came from **11 countries** (US 63%, UK 12%, CA 10%, others)
-- See full case study: [CASE-STUDY.md](./output/CASE-STUDY.md)
+- See full case study: [CASE-STUDY.md](./CASE-STUDY.md)
+- See client-ready sample report: [Amazon Review AI Monitor Sample Report](./sample-report/Amazon%20Review%20AI%20Monitor%20Sample%20Report.md)
 
 ### Architecture
 
 ```
-Cron Trigger
+run_demo.py
     ↓
-Apify (web_wanderer/amazon-reviews-extractor)
+Raw reviews JSON or live Apify scrape
     ↓
-n8n workflow orchestration
+Claude-compatible LLM ───── Classify  (negative category / severity / tags)
     ↓
-Claude AI ───── Classify  (good / bad / inquiry / shipping / refund)
+Theme clustering ───── Top 5 root-cause themes
     ↓
-Claude AI ───── Draft English reply (only for negative)
+Matplotlib visualization ───── 1680x1080 bilingual PNG
     ↓
-Claude AI ───── Theme clustering (Top 5)
+LLM reply samples ───── 5 customer-service drafts
     ↓
-Google Sheets / Lark webhook / Slack
-    ↓
-Seller receives mobile push → 1-min human review → send
+Chinese PoC report ───── client-ready Markdown package
 ```
 
 ### Monthly cost estimate (production scale)
@@ -81,17 +80,18 @@ For a seller protecting $50K/mo revenue from review-driven ranking drops, this i
 
 ```
 .
-├── CASE-STUDY.md             # 2,000-word case study (Chinese)
-├── output/
-│   ├── top5-negative-themes.png    # Hero visualization (1680x1080)
-│   ├── classified-reviews.json     # All 90 reviews classified
-│   ├── theme-clusters.json         # Top 5 theme breakdown
-│   └── ai-reply-samples.md         # 5 sample English replies w/ commentary
-├── fixtures/
-│   └── reviews-raw-90.json         # Raw scraped data (PII removed)
-├── n8n-workflow.json         # Importable n8n workflow (from prior session)
-├── cluster.py                # Theme clustering logic
-└── visualize.py              # Generate matplotlib chart
+├── run_demo.py                       # One-command PoC pipeline
+├── src/amazon_review_ai_monitor/     # Apify, LLM, clustering, chart, report modules
+├── sample-report/                    # Client-ready example deliverable
+│   ├── Amazon Review AI Monitor Sample Report.md
+│   └── 4-top5-themes.png
+├── reviews-raw-90.json               # Raw scraped demo data (PII removed)
+├── classified-reviews.json           # 90 Claude-classified reviews
+├── theme-clusters.json               # Top 5 theme breakdown
+├── ai-reply-samples.md               # 5 sample English replies w/ commentary
+├── top5-negative-themes.png          # Hero visualization (1680x1080)
+├── cluster.py                        # Backward-compatible clustering wrapper
+└── visualize.py                      # Backward-compatible chart wrapper
 ```
 
 ### Talk to me
@@ -102,6 +102,10 @@ I do custom AI automation builds for cross-border e-commerce teams. Reach out:
 - 🧑‍💻 GitHub: https://github.com/lhrdsg6-debug
 
 Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Claude API actual cost (~¥30-100), I keep rights to anonymized case study.
+
+Fast PoC offer:
+- Free diagnostic for 1 SKU: negative theme breakdown + 5 English reply samples
+- If useful: ¥699 for a 3-SKU report package
 
 ---
 
@@ -136,7 +140,8 @@ Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Cl
 - 总耗时:**38 秒**
 - 总成本:**$0.09(¥0.65)**
 - review 实际来源国:**11 个国家**(美国 63% / 英国 12% / 加拿大 10% / 其他)
-- 完整案例分析:[CASE-STUDY.md](./output/CASE-STUDY.md)
+- 完整案例分析:[CASE-STUDY.md](./CASE-STUDY.md)
+- 可直接发客户的样例报告:[Amazon Review AI Monitor Sample Report](./sample-report/Amazon%20Review%20AI%20Monitor%20Sample%20Report.md)
 
 ### 月度成本预估(生产规模)
 
@@ -172,41 +177,64 @@ Currently offering **free PoC** to first 3-5 sellers — you pay only Apify + Cl
 
 **当前免费 PoC 名额:5 位卖家**,只收取 Apify + Claude API 的实际成本(¥30-100),交换条件是允许我把脱敏后的成果写进案例。
 
+快速合作方式:
+- 免费诊断 1 个 SKU:差评主题拆解 + 5 条英文回复样本
+- 如果觉得有用:¥699 / 3 个 SKU 出完整报告包
+
 ---
 
 ## 🛠️ Setup (for developers)
 
 ### Prerequisites
 - Python 3.10+
-- Apify account (free $5 credit)
-- Anthropic API key
-- n8n cloud account (14-day trial) or self-hosted
+- For reliable local demo: no API keys required
+- For live scraping: Apify account
+- For fresh AI classification/replies: Anthropic or OpenAI-compatible Claude gateway key
 
-### Quick start
+### Quick start: reliable local demo
 ```bash
 git clone https://github.com/lhrdsg6-debug/amazon-review-ai-monitor
 cd amazon-review-ai-monitor
-cp .env.example .env  # fill in API keys
 pip install -r requirements.txt
 
-# Option A: Run Python pipeline standalone
-python src/main.py --asins B09176JCKZ,B0C6KPRV8S,B081JSFHZK --region uk
-
-# Option B: Import n8n-workflow.json into your n8n
-# (then trigger manually or schedule via cron)
+python3 run_demo.py \
+  --asins B09176JCKZ,B0C6KPRV8S,B081JSFHZK \
+  --region uk \
+  --client-name "sample-client" \
+  --max-reviews-per-asin 30 \
+  --raw-input reviews-raw-90.json \
+  --classified-input classified-reviews.json \
+  --reply-samples-input ai-reply-samples.md
 ```
+
+This generates a complete PoC package under `output/sample-client/` without spending API credits.
+
+### Live scraping mode
+```bash
+cp .env.example .env  # fill in APIFY_TOKEN and LLM_API_KEY or LANYI_API_KEY
+
+python3 run_demo.py \
+  --asins B09176JCKZ,B0C6KPRV8S,B081JSFHZK \
+  --region uk \
+  --client-name "live-client" \
+  --max-reviews-per-asin 30
+```
+
+Note: Amazon review pages can trigger anti-bot/CAPTCHA blocks. Treat Apify as a replaceable ingestion layer; the reporting pipeline remains usable with imported review JSON.
 
 ### Project structure
 ```
-├── n8n-workflow.json           # Drop into n8n → Import workflow
-├── src/                        # Python alternative (if not using n8n)
+├── run_demo.py                 # One-command CLI pipeline
+├── src/amazon_review_ai_monitor/
 │   ├── apify_client.py
 │   ├── classifier.py
-│   ├── responder.py
-│   ├── sheets_writer.py
-│   └── feishu_notify.py
-├── output/                     # Demo results (this run)
-├── fixtures/                   # Raw scraped sample data
+│   ├── llm_client.py
+│   ├── report.py
+│   ├── theme_cluster.py
+│   └── visualize.py
+├── sample-report/              # Client-ready sample output
+├── output/                     # Generated locally, ignored by git
+├── reviews-raw-90.json         # Raw scraped sample data
 └── .env.example
 ```
 
@@ -226,6 +254,7 @@ Claude's Chinese handling is meaningfully better for the bilingual reporting fea
 ## ⚠️ Important caveats
 
 - **Not a fully automated solution.** Amazon ToS requires human-sent responses.
+- **Amazon scraping is unstable.** Review pages may trigger anti-bot/CAPTCHA blocks; import raw review JSON when live scraping fails.
 - **AI errors happen.** Always review before sending.
 - **Privacy.** Review text passes through LLM API; disclose in client contracts.
 - **Build quality issues.** The system surfaces problems, it doesn't fix them. Engineering + supply-chain follow-up is on the seller.
